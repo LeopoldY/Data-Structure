@@ -1,5 +1,5 @@
 #include <iostream>
-#include "./Custom-List/DoubleLinkedList.hpp"
+#include "./List/DoubleLinkedList.hpp"
 
 int main() {
     int arr[] = {1, 2, 3, 4, 5};
