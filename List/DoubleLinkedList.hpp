@@ -2,10 +2,7 @@
 // Created by 杨程 on 2024/2/18.
 //
 
-#ifndef CUSTOM_LIST_DOUBLELINKEDLIST_HPP
-#define CUSTOM_LIST_DOUBLELINKEDLIST_HPP
-
-#endif //CUSTOM_LIST_DOUBLELINKEDLIST_HPP
+#pragma once
 
 #include "ListNode.hpp"
 #include <iostream>
@@ -106,7 +103,7 @@ public:
         }
     }
 
-    void getMetaData() {
+    virtual void getMetaData() {
         dListNodePtr(T) p = head->next;
         std::cout << "{[";
         while (p != tail) {
@@ -124,7 +121,7 @@ public:
     void remove(int index); // 删除指定下标的节点
 
     dListNodePtr(T) getNode(T value, dll::FindMode = dll::GET_NODE_BY_INDEX); // 获取节点
-    bool isEmpty() { return length == 0; } // 判断链表是否为空
+    virtual bool isEmpty() { return length == 0; } // 判断链表是否为空
 
     void reverse(); // 反转链表
 };

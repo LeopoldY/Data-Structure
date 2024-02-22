@@ -2,13 +2,10 @@
 // Created by 杨程 on 2024/2/18.
 //
 
+#pragma once
+
 #include <iostream>
 #include "ListNode.hpp"
-
-#ifndef CUSTOM_LIST_SINGLE_LINKED_LIST_HPP
-#define CUSTOM_LIST_SINGLE_LINKED_LIST_HPP
-
-#endif //CUSTOM_LIST_SINGLE_LINKED_LIST_HPP
 
 namespace sll { // 单链表命名空间
     enum findFormate { // 查找节点的方式
@@ -105,15 +102,15 @@ public:
     void insert(T data, int index); // 在指定位置（下标）插入元素
     void insertNextNode(sListNodePtr(T) p, T data); // 在指定节点后插入元素
     void insertNextNode(sListNodePtr(T) p, sListNodePtr(T) target); // 在指定节点后插入节点
-    void insertPriorNode(sListNodePtr(T) p, T data); // 在指定节点前插入元素
-    void insertPriorNode(sListNodePtr(T) p, sListNodePtr(T) target); // 在指定节点前插入节点
+    virtual void insertPriorNode(sListNodePtr(T) p, T data); // 在指定节点前插入元素
+    virtual void insertPriorNode(sListNodePtr(T) p, sListNodePtr(T) target); // 在指定节点前插入节点
     void extend(T data); // 在末尾添加元素
 
 // MARK: - 删除操作：
     T remove(int index); // 删除元素
-    void deleteNode(sListNodePtr(T) p); // 删除指定节点
+    virtual void deleteNode(sListNodePtr(T) p); // 删除指定节点
 
-// MARK: - 只读操作接口：
+    virtual // MARK: - 只读操作接口：
     void getMetaData(); // 获取链表元数据
     T getElem(int index); // 按照下标获取指定元素的值
     int getIndex(T data); // 获取指定元素的下标
@@ -186,10 +183,10 @@ sListNodePtr(T) SingleLinkedList<T>::operator=(SingleLinkedList<T> &list) {
 template <typename T>
 bool SingleLinkedList<T>::operator==(SingleLinkedList<T> &list) {
     // 重载相等运算符
-    if (length != list.length) {
+    if (this->length != list.length) {
         return false;
     }
-    sListNodePtr(T) p = head->next;
+    sListNodePtr(T) p = this->head->next;
     sListNodePtr(T) q = list.head->next;
     while (p && q) {
         if (p->data != q->data) {
@@ -253,7 +250,8 @@ void SingleLinkedList<T>::getMetaData() {
     // 获取链表元数据
     std::cout << "{[";
     sListNodePtr(T) p = head->next;
-    while (p) {
+    for(int i = 0; i < length; i++) {
+        // 通过长度遍历链表，以防止循环链表的死循环
         std::cout << p->data << " ";
         p = p->next;
     }

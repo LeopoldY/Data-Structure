@@ -2,10 +2,10 @@
 // Created by 杨程 on 2024/2/19.
 //
 
-#ifndef CUSTOM_LIST_LISTNODE_HPP
-#define CUSTOM_LIST_LISTNODE_HPP
+#pragma once
 
-#endif //CUSTOM_LIST_LISTNODE_HPP
+//#ifndef CUSTOM_LIST_LISTNODE_HPP
+//#define CUSTOM_LIST_LISTNODE_HPP
 
 #define sListNodePtr(T) sListNode<T> * // 单链表节点指针
 #define dListNodePtr(T) dListNode<T> * // 双链表节点指针
@@ -18,7 +18,7 @@ template <typename T> struct sListNode { // 单链表节点
         data = 0;
         next = nullptr;
     }
-    sListNode(T data, sListNodePtr(T) next = nullptr) {
+    explicit sListNode(T data, sListNodePtr(T) next = nullptr) {
         this->data = data;
         this->next = next;
     }
@@ -54,7 +54,9 @@ struct dListNode {
         prior = nullptr;
         next = nullptr;
     }
-    dListNode(T data, dListNodePtr(T) prior = nullptr, dListNodePtr(T) next = nullptr) {
+    explicit dListNode(T data,
+                       dListNodePtr(T) prior = nullptr,
+                       dListNodePtr(T) next = nullptr) {
         this->data = data;
         this->prior = prior;
         this->next = next;
@@ -107,3 +109,4 @@ struct dListNode {
     }
 
 };
+//#endif //CUSTOM_LIST_LISTNODE_HPP
