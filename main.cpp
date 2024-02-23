@@ -1,8 +1,9 @@
 #include <iostream>
-#include "List/CycleList.hpp"
+#include "List/StaticList.hpp"
+using namespace std;
+
 int main() {
-    int arr[] = {1, 2, 3, 4, 5};
-    DoubleLinkedList<int> list(arr, 5);
-    list.getMetaData();
+    StaticNode<int> *list = new StaticNode<int>[10];
+    StaticNodePtr(int) head = list;
     return 0;
 }
