@@ -4,11 +4,27 @@
 
 #pragma once
 
-//#ifndef CUSTOM_LIST_LISTNODE_HPP
-//#define CUSTOM_LIST_LISTNODE_HPP
-
 #define sListNodePtr(T) sListNode<T> * // 单链表节点指针
 #define dListNodePtr(T) dListNode<T> * // 双链表节点指针
+#define StaticNodePtr(T) StaticNode<T> * // 静态链表节点指针
+
+template <typename T> struct StaticNode { // 静态链表节点
+    T data;
+    int next;
+
+    StaticNode() {
+        data = 0;
+        next = -2;
+    } // 默认构造函数
+    explicit StaticNode(T data, int next = -2) {
+        this->data = data;
+        this->next = next;
+    }
+
+    ~StaticNode() {
+        next = -1;
+    }
+};
 
 template <typename T> struct sListNode { // 单链表节点
     T data;
@@ -109,4 +125,3 @@ struct dListNode {
     }
 
 };
-//#endif //CUSTOM_LIST_LISTNODE_HPP
