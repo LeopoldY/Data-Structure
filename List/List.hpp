@@ -15,7 +15,7 @@ protected:
     T *data; // 数据
     int length; // 长度，顺序表目前的数据量
     int capacity; // 总容量，顺序表能够容纳的最多数据量
-    
+
 private:
     void clear(){
         delete[] data;
@@ -150,5 +150,7 @@ public:
         }
         return -1;
     }
+
+    bool isEmpty() { return length == 0; }
 
 };

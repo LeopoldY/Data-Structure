@@ -1,9 +1,7 @@
-#include <iostream>
-#include "List/StaticList.hpp"
+#include "Stack&Queue/Stack.hpp"
 using namespace std;
 
 int main() {
-    StaticNode<int> *list = new StaticNode<int>[10];
-    StaticNodePtr(int) head = list;
+    Stack<int> s(3);
     return 0;
 }
