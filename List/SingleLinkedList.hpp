@@ -24,8 +24,8 @@ class SingleLinkedList {
 protected:
     sListNodePtr(T) head; // 头结点
     int length;
-private:
-    void clear() {
+
+    virtual void clear() {
         // 清空链表
         sListNodePtr(T) p = head->next;
         while (p) {
@@ -36,6 +36,8 @@ private:
         head->next = nullptr;
         length = 0;
     }
+
+private:
     void copyFrom(SingleLinkedList<T> &list) {
         // 从另一个链表复制
         clear(); // 清空当前链表
@@ -117,6 +119,9 @@ public:
     sListNodePtr(T) getNode(T value,
                             sll::findFormate formate = sll::GET_NODE_BY_INDEX); // 获取指定下标节点
     void reverse(); // 反转链表
+    virtual bool isEmpty() {
+        return head->next == nullptr;
+    }
 // MARK: - 重载操作符：
     T operator[](int index); // 重载下标运算符
     bool operator==(SingleLinkedList<T> &list); // 重载相等运算符

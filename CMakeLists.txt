@@ -11,4 +11,7 @@ add_executable(Data_Structure main.cpp
         List/SingleLinkedList.hpp
         Stack&Queue/Stack.hpp
         Stack&Queue/Queue.hpp
+        Stack&Queue/LinkedStack.hpp
+        Stack&Queue/LinkedQueue.hpp
+        List/ListNode.hpp
 )

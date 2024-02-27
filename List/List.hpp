@@ -151,6 +151,6 @@ public:
         return -1;
     }
 
-    bool isEmpty() { return length == 0; }
+    virtual bool isEmpty() { return length == 0; }
 
 };
