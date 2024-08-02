@@ -107,8 +107,7 @@ public:
     int getMaxLength() { return capacity; }
     
     bool insert(int i, T e) { // 在下标 i 处插入 e
-        if (i < 0 || i >= length) return false;
-        if (length >= capacity) return false;
+        if (i < 0 || i > length || length == capacity) return false;
         
         for (int j = length; j > i; j--) data[j] = data[j-1];
         data[i] = e;

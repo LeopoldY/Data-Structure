@@ -14,4 +14,6 @@ add_executable(Data_Structure main.cpp
         Stack&Queue/LinkedStack.hpp
         Stack&Queue/LinkedQueue.hpp
         List/ListNode.hpp
+        Tree/BinaryTree.hpp
+        Tree/BinaryTree.hpp
 )

@@ -4,28 +4,58 @@
 #pragma once
 
 #include <iostream>
-#include "../List/List.hpp"
+#define MAX_STACK_SIZE 100
 
 template <typename T>
-class Stack: private List<T>{
+class Stack{
 protected:
-    int top;
+    int size;
+    int capacity;
+    T *data;
 public:
-    Stack(): List<T>() {this->top = -1;} // 默认构造
-    explicit Stack(T const &size): List<T>(size) {this->top = -1;} // 重载构造
-    T pop() {
-        if (this->isEmpty()) {
-            throw std::out_of_range("Stack is empty!");
+    Stack(int capacity = MAX_STACK_SIZE) {
+        this->capacity = capacity;
+        this->size = 0;
+        this->data = new T[capacity];
+    }
+
+    ~Stack() {
+        delete[] data;
+    }
+
+    void push(T e) {
+        if (size == capacity) {
+            std::cerr << "The stack is full." << std::endl;
+            return;
         }
-        return this->remove(this->length - 1);
+
+        data[size++] = e;
     }
-    void push(T const &e) {
-        this->extend(e);
-        this->top++;
+
+    T pop() {
+        if (size == 0) {
+            std::cerr << "The stack is empty." << std::endl;
+            return NULL;
+        }
+
+        return data[--size];
     }
-    T& getTop() {
-        if (this->top == -1) std::cerr << "stack is empty!" << std::endl;
-        return this->data[top];
+
+    T top() {
+        if (size == 0) {
+            std::cerr << "The stack is empty." << std::endl;
+            return NULL;
+        }
+
+        return data[size - 1];
+    }
+
+    int getSize() {
+        return size;
+    }
+
+    bool isEmpty() {
+        return size == 0;
     }
 
 };

@@ -6,36 +6,65 @@
 
 #include <iostream>
 
-#include "../List/List.hpp"
-
-#define MAX_QUEUE_SIZE 10
+#define MAX_QUEUE_SIZE 100
 
 template <typename T>
-class Queue: private List<T>{
-protected:
+class Queue{
+private:
+    T *data;
     int front;
     int rear;
+    int maxSize;
 public:
-    Queue(): List<T>(MAX_QUEUE_SIZE), front(0), rear(0) {} // 默认构造
-    explicit Queue(T const &size): List<T>(size), front(0), rear(0) {} // 重载构造
-    T dequeue() {
-        if (this->isEmpty()) {
-            throw std::out_of_range("Queue is empty!");
+    Queue(int size = MAX_QUEUE_SIZE) {
+        data = new T[size];
+        maxSize = size;
+        front = rear = 0;
+    }
+
+    ~Queue() {
+        delete[] data;
+    }
+
+    bool isEmpty() {
+        return front == rear;
+    }
+
+    bool isFull() {
+        return (rear + 1) % maxSize == front;
+    }
+
+    void push(T e) {
+        if (isFull()) {
+            std::cerr << "Queue is full." << std::endl;
+            return;
         }
-        T e = this->data[front];
-        front = (front + 1) % this->capacity;
-        this->length--;
+
+        data[rear] = e;
+        rear = (rear + 1) % maxSize;
+    }
+
+    T pop() {
+        if (isEmpty()) {
+            std::cerr << "Queue is empty." << std::endl;
+            return T();
+        }
+
+        T e = data[front];
+        front = (front + 1) % maxSize;
         return e;
     }
-    void enqueue(T const &e) {
-        if (isFull()) {
-            throw std::out_of_range("Queue is full!");
+
+    T getFront() {
+        if (isEmpty()) {
+            std::cerr << "Queue is empty." << std::endl;
+            return T();
         }
-        this->data[rear] = e;
-        rear = (rear + 1) % this->capacity;
-        this->length++;
+
+        return data[front];
     }
-    T& getFront() { return this->data[front]; }
-    T& getRear() { return this->data[rear]; }
-    bool isFull() { return this->length == this->capacity; }
+
+    int getLength() {
+        return (rear - front + maxSize) % maxSize;
+    }
 };

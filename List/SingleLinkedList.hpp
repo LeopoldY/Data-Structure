@@ -90,15 +90,15 @@ public:
             std::cerr << "Format error" << std::endl;
         }
     }
-    ~SingleLinkedList() {
-        // 析构函数
-        sListNodePtr(T) p = head;
-        while (p) {
-            sListNodePtr(T) q = p;
-            p = p->next;
-            delete q;
-        }
-    }
+//    ~SingleLinkedList() {
+//        // 析构函数
+//        sListNodePtr(T) p = head;
+//        while (p) {
+//            sListNodePtr(T) q = p;
+//            p = p->next;
+//            delete q;
+//        }
+//    }
 
 // MARK: - 插入操作：
     void insert(T data, int index); // 在指定位置（下标）插入元素
@@ -114,6 +114,8 @@ public:
 
     virtual // MARK: - 只读操作接口：
     void getMetaData(); // 获取链表元数据
+    sListNodePtr(T) getHead() {return this->head;}
+    int getLength() {return this->length;}
     T getElem(int index); // 按照下标获取指定元素的值
     int getIndex(T data); // 获取指定元素的下标
     sListNodePtr(T) getNode(T value,
@@ -166,16 +168,27 @@ sListNodePtr(T) SingleLinkedList<T>::getNode(T value, sll::findFormate formate) 
 
 template <typename T>
 void SingleLinkedList<T>::reverse() {
-    // 反转链表
-    sListNodePtr(T) p = head->next; // p 指向第一个节点
-    sListNodePtr(T) q = nullptr; // q 指向前一个节点
-    while (p) {
-        sListNodePtr(T) r = p->next;
-        p->next = q;
-        q = p;
-        p = r;
+    // 反转链表 - 1
+//    sListNodePtr(T) p = head->next;
+//    sListNodePtr(T) q = nullptr;
+//    this->head->next = nullptr;
+//    while(p != nullptr){
+//        q = p->next;
+//        p->next = this->head->next;
+//        this->head->next = p;
+//        p = q;
+//    }
+
+    // 2
+    sListNodePtr(T) prev, *p = head->next, *succ = p->next;
+    p->next = nullptr;
+    while (succ != nullptr) {
+        prev = p;
+        p = succ;
+        succ = p->next;
+        p->next = prev;
     }
-    head->next = q;
+    head->next = p;
 }
 
 template <typename T>

@@ -39,10 +39,6 @@ template <typename T> struct sListNode { // 单链表节点
         this->next = next;
     }
 
-    ~sListNode() {
-        next = nullptr;
-    }
-
     sListNodePtr(T) insertAsNext(T const &e) {
         // 在当前节点之后插入新节点
         sListNodePtr(T) x = new sListNode(e, this->next);
