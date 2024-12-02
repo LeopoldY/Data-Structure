@@ -16,4 +16,10 @@ add_executable(Data_Structure main.cpp
         List/ListNode.hpp
         Tree/BinaryTree.hpp
         Tree/BinaryTree.hpp
+        Solution/TreeSolution.hpp
+        Solution/StackAndQueueSolution.hpp
+        Stack&Queue/MyStack.hpp
+        Stack&Queue/MyQueue.hpp
+        Graph/AdjMatrixGraph.hpp
+        Graph/AdjMatrixGraph.hpp
 )

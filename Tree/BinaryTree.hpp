@@ -10,6 +10,7 @@
 # include <vector>
 
 #define BinTreeNodePtr(T) BinaryTreeNode<T> *
+#define NULL_VALUE INT_MIN
 
 template <typename T>
 class BinaryTreeNode {
