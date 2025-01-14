@@ -55,11 +55,10 @@ template <typename T> struct sListNode { // 单链表节点
 
 };
 
-template <typename T>
-struct dListNode {
+template <typename T> struct dListNode {
     T data;
-    dListNodePtr(T) prior;
-    dListNodePtr(T) next;
+    dListNodePtr(T) prior; // 前驱
+    dListNodePtr(T) next; // 后继
 
     dListNode() {
         data = 0;

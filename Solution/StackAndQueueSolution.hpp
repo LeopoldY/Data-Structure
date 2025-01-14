@@ -9,6 +9,7 @@
 #include <string>
 #include "../Stack&Queue/Stack.hpp"
 #include "../Stack&Queue/Queue.hpp"
+#include <vector>
 
 
 class SQSolution {

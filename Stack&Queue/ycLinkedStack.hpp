@@ -4,13 +4,13 @@
 
 #pragma once
 
-#include "../List/SingleLinkedList.hpp"
+#include "../List/SingleList.hpp"
 
 template <typename T>
-class LinkedStack: private SingleLinkedList<T> {
+class ycLinkedStack: public SingleList<T> {
 public:
-    LinkedStack(): SingleLinkedList<T>() {} // 默认构造
-    ~LinkedStack() {
+    ycLinkedStack(): SingleList<T>() {} // 默认构造
+    ~ycLinkedStack() {
         this->clear();
     } // 析构函数
     void push(T const &e) {

@@ -5,22 +5,22 @@
 #pragma once
 
 #include <iostream>
-#include "../List/SingleLinkedList.hpp"
+#include "../List/SingleList.hpp"
 
 template <typename T>
-class LinkedQueue: private SingleLinkedList<T> { // 链式队列
+class LinkedQueue: private SingleList<T> { // 链式队列
 protected:
     sListNodePtr(T) rear;
     sListNodePtr(T) front;
 
 private:
     void clear() {
-        SingleLinkedList<T>::clear();
+        SingleList<T>::clear();
         rear = front = nullptr;
     }
 public:
-    LinkedQueue(): SingleLinkedList<T>(),
-            rear(this->head), front(this->head) {} // 默认构造
+    LinkedQueue(): SingleList<T>(),
+                   rear(this->head), front(this->head) {} // 默认构造
     T dequeue() {
         if (isEmpty()) {
             throw std::out_of_range("Queue is empty!");

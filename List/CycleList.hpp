@@ -5,12 +5,12 @@
 #pragma once // 防止头文件重复引用
 
 #include <iostream>
-#include "SingleLinkedList.hpp"
+#include "SingleList.hpp"
 #include "DoubleLinkedList.hpp"
 
 // MARK: - CycleList
 template <typename T>
-class CircularLinkedList: public SingleLinkedList<T> { // 继承单链表
+class CircularLinkedList: public SingleList<T> { // 继承单链表
 private:
     void clear() {
         // 清空链表
@@ -26,18 +26,18 @@ private:
     }
 public:
 // MARK: - Constructor
-    CircularLinkedList(): SingleLinkedList<T>(){
+    CircularLinkedList(): SingleList<T>(){
         this->head->next = this->head;
     } // 默认构造函数
-    CircularLinkedList(T arr[], int n): SingleLinkedList<T>(arr, n) {
-        if (SingleLinkedList<T>::head == nullptr) {
+    CircularLinkedList(T arr[], int n): SingleList<T>(arr, n) {
+        if (SingleList<T>::head == nullptr) {
             return;
         }
-        sListNodePtr(T) cur = SingleLinkedList<T>::head;
+        sListNodePtr(T) cur = SingleList<T>::head;
         while (cur->next != nullptr) { // 找到尾节点
             cur = cur->next;
         }
-        cur->next = SingleLinkedList<T>::head;
+        cur->next = SingleList<T>::head;
     }
 // MARK: - Destructor
     ~CircularLinkedList() {
@@ -72,7 +72,7 @@ public:
 // MARK: - Method-Implementation
 template<typename T>
 void CircularLinkedList<T>::getMetaData() {
-    SingleLinkedList<T>::getMetaData();
+    SingleList<T>::getMetaData();
     std::cout << "This is a cycle list." << std::endl;
 }
 

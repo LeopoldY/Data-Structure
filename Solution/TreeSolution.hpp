@@ -5,7 +5,7 @@
 #ifndef DATA_STRUCTURE_TREESOLUTION_HPP
 #define DATA_STRUCTURE_TREESOLUTION_HPP
 
-#include "../Tree/BinaryTree.hpp"
+#include "../Tree/ycBinaryTree.hpp"
 #include "../Stack&Queue/Stack.hpp"
 #include "../Stack&Queue/Queue.hpp"
 #include <vector>
@@ -44,7 +44,7 @@ private:
 public:
     // 1. 判断两棵树是否相同
     template<typename T>
-    bool isSameTree(BinaryTreeNode<T> *p, BinaryTreeNode<T> *q) {
+    bool isSameTree(ycBiNode<T> *p, ycBiNode<T> *q) {
         if (p == nullptr && q == nullptr) return true;
         if (p == nullptr || q == nullptr) return false;
 
@@ -60,15 +60,15 @@ public:
         if (root->left == nullptr && root->right == nullptr) return true;
         if (root->left == nullptr || root->right == nullptr) return false;
 
-//        return isMirrorTree(root->left, root->right);
+//        return isMirrorTree(_root->left, _root->right);
         Stack<BinTreeNodePtr(T)> s(100);
         s.push(root->left);
         s.push(root->right);
 
         while (!s.isEmpty()) {
-            BinaryTreeNode<int> *right = s.top();
+            ycBiNode<int> *right = s.top();
             s.pop();
-            BinaryTreeNode<int> *left = s.top();
+            ycBiNode<int> *left = s.top();
             s.pop();
 
             if (left == nullptr && right == nullptr) continue;
@@ -104,7 +104,7 @@ public:
         queue.push(root);
 
         while (!queue.isEmpty()) {
-            BinaryTreeNode<T>* current = queue.getFront();
+            ycBiNode<T>* current = queue.getFront();
             queue.pop();
             stack.push(current);
 
@@ -119,7 +119,7 @@ public:
 
         // 输出逆序层序遍历结果
         while (!stack.isEmpty()) {
-            BinaryTreeNode<T>* node = stack.top();
+            ycBiNode<T>* node = stack.top();
             stack.pop();
             std::cout << node->data << " ";
         }

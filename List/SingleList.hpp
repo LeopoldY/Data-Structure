@@ -18,9 +18,9 @@ namespace sll { // 单链表命名空间
     };
 }
 
-// MARK: - SingleLinkedList
+// MARK: - SingleList
 template <typename T>
-class SingleLinkedList {
+class SingleList {
 protected:
     sListNodePtr(T) head; // 头结点
     int length;
@@ -38,7 +38,7 @@ protected:
     }
 
 private:
-    void copyFrom(SingleLinkedList<T> &list) {
+    void copyFrom(SingleList<T> &list) {
         // 从另一个链表复制
         clear(); // 清空当前链表
         sListNodePtr(T) p = list.head->next; // 指向待复制链表的第一个节点
@@ -61,14 +61,14 @@ private:
     }
 public:
 // MARK: - 构造函数和析构函数：
-    SingleLinkedList() {
+    SingleList() {
         // 构造函数: 空链表
         head = new sListNode<T>;
         head->next = nullptr;
         length = 0;
     }
-    SingleLinkedList(T *array, int length,
-                     sll::insertFormate format = sll::TAIL_INSERT) {
+    SingleList(T *array, int length,
+               sll::insertFormate format = sll::TAIL_INSERT) {
         // 构造函数: 从数组构造链表
         if (format == sll::TAIL_INSERT) {
             head = new sListNode<T>;
@@ -90,7 +90,7 @@ public:
             std::cerr << "Format error" << std::endl;
         }
     }
-//    ~SingleLinkedList() {
+//    ~SingleList() {
 //        // 析构函数
 //        sListNodePtr(T) p = head;
 //        while (p) {
@@ -121,18 +121,19 @@ public:
     sListNodePtr(T) getNode(T value,
                             sll::findFormate formate = sll::GET_NODE_BY_INDEX); // 获取指定下标节点
     void reverse(); // 反转链表
+
+    // MARK: - 重载操作符：
+    T operator[](int index); // 重载下标运算符
+    bool operator==(SingleList<T> &list); // 重载相等运算符
+    sListNodePtr(T) operator=(SingleList<T> &list); // 重载赋值运算符
     virtual bool isEmpty() {
         return head->next == nullptr;
     }
-// MARK: - 重载操作符：
-    T operator[](int index); // 重载下标运算符
-    bool operator==(SingleLinkedList<T> &list); // 重载相等运算符
-    sListNodePtr(T) operator=(SingleLinkedList<T> &list); // 重载赋值运算符
 };
 
 // MARK: - realizations
 template <typename T>
-sListNodePtr(T) SingleLinkedList<T>::getNode(T value, sll::findFormate formate) {
+sListNodePtr(T) SingleList<T>::getNode(T value, sll::findFormate formate) {
     /* 获取指定节点:
         value: 下标或者数据
         formate: 获取节点的方式, 默认按照下标查找*/
@@ -167,7 +168,7 @@ sListNodePtr(T) SingleLinkedList<T>::getNode(T value, sll::findFormate formate) 
 }
 
 template <typename T>
-void SingleLinkedList<T>::reverse() {
+void SingleList<T>::reverse() {
     // 反转链表 - 1
 //    sListNodePtr(T) p = head->next;
 //    sListNodePtr(T) q = nullptr;
@@ -192,14 +193,14 @@ void SingleLinkedList<T>::reverse() {
 }
 
 template <typename T>
-sListNodePtr(T) SingleLinkedList<T>::operator=(SingleLinkedList<T> &list) {
+sListNodePtr(T) SingleList<T>::operator=(SingleList<T> &list) {
     // 重载赋值运算符
     copyFrom(list);
     return head;
 }
 
 template <typename T>
-bool SingleLinkedList<T>::operator==(SingleLinkedList<T> &list) {
+bool SingleList<T>::operator==(SingleList<T> &list) {
     // 重载相等运算符
     if (this->length != list.length) {
         return false;
@@ -217,7 +218,7 @@ bool SingleLinkedList<T>::operator==(SingleLinkedList<T> &list) {
 }
 
 template <typename T>
-T SingleLinkedList<T>::remove(int index) {
+T SingleList<T>::remove(int index) {
     // 根据下标删除元素
     if (index < 0 || index >= length) { // 下标越界
         std::cerr << "Index out of range" << std::endl;
@@ -233,7 +234,7 @@ T SingleLinkedList<T>::remove(int index) {
 }
 
 template <typename T>
-void SingleLinkedList<T>::deleteNode(sListNodePtr(T) p) {
+void SingleList<T>::deleteNode(sListNodePtr(T) p) {
     // 删除指定节点
     if (!p) { // p 为空
         std::cerr << "Node is null" << std::endl;
@@ -250,7 +251,7 @@ void SingleLinkedList<T>::deleteNode(sListNodePtr(T) p) {
 }
 
 template <typename T>
-T SingleLinkedList<T>::operator[](int index) {
+T SingleList<T>::operator[](int index) {
     // 重载下标运算符
     if (index < 0 || index >= length) {
         std::cerr << "Index out of range" << std::endl;
@@ -264,7 +265,7 @@ T SingleLinkedList<T>::operator[](int index) {
 }
 
 template <typename T>
-void SingleLinkedList<T>::getMetaData() {
+void SingleList<T>::getMetaData() {
     // 获取链表元数据
     std::cout << "{[";
     sListNodePtr(T) p = head->next;
@@ -278,7 +279,7 @@ void SingleLinkedList<T>::getMetaData() {
 }
 
 template <typename T>
-void SingleLinkedList<T>::insert(T data, int index) {
+void SingleList<T>::insert(T data, int index) {
     // 在指定下标位置插入元素
     if (index < 0 || index > length) {
         std::cerr << "Index out of range" << std::endl;
@@ -293,7 +294,7 @@ void SingleLinkedList<T>::insert(T data, int index) {
 }
 
 template <typename T>
-void SingleLinkedList<T>::insertNextNode(sListNodePtr(T) p, T data) {
+void SingleList<T>::insertNextNode(sListNodePtr(T) p, T data) {
     // 在指定节点后插入元素
     if (!p) {
         std::cerr << "Node is null" << std::endl;
@@ -304,7 +305,7 @@ void SingleLinkedList<T>::insertNextNode(sListNodePtr(T) p, T data) {
 }
 
 template <typename T>
-void SingleLinkedList<T>::insertNextNode(sListNodePtr(T) p, sListNodePtr(T) target) {
+void SingleList<T>::insertNextNode(sListNodePtr(T) p, sListNodePtr(T) target) {
     // 在指定节点后插入节点
     if (!p && !target) {
         std::cerr << "Node is null" << std::endl;
@@ -315,7 +316,7 @@ void SingleLinkedList<T>::insertNextNode(sListNodePtr(T) p, sListNodePtr(T) targ
 }
 
 template <typename T>
-void SingleLinkedList<T>::insertPriorNode(sListNodePtr(T) p, T data) {
+void SingleList<T>::insertPriorNode(sListNodePtr(T) p, T data) {
     // 在指定节点前插入元素
     if (!p) {
         std::cerr << "Node is null" << std::endl;
@@ -328,7 +329,7 @@ void SingleLinkedList<T>::insertPriorNode(sListNodePtr(T) p, T data) {
 }
 
 template <typename T>
-void SingleLinkedList<T>::insertPriorNode(sListNodePtr(T) p, sListNodePtr(T) target) {
+void SingleList<T>::insertPriorNode(sListNodePtr(T) p, sListNodePtr(T) target) {
     // 在指定节点前插入节点
     if (!p && !target) {
         std::cerr << "Node is null" << std::endl;
@@ -340,13 +341,13 @@ void SingleLinkedList<T>::insertPriorNode(sListNodePtr(T) p, sListNodePtr(T) tar
 }
 
 template <typename T>
-void SingleLinkedList<T>::extend(T data) {
+void SingleList<T>::extend(T data) {
     // 在末尾添加元素
     insert(data, length);
 }
 
 template <typename T>
-T SingleLinkedList<T>::getElem(int index) {
+T SingleList<T>::getElem(int index) {
     // 按照下标获取指定元素的值
     if (index < 0 || index >= length) {
         std::cerr << "Index out of range" << std::endl;
@@ -356,7 +357,7 @@ T SingleLinkedList<T>::getElem(int index) {
 }
 
 template <typename T>
-int SingleLinkedList<T>::getIndex(T data) {
+int SingleList<T>::getIndex(T data) {
     // 获取指定元素的下标
     sListNodePtr(T) p = head->next;
     for (int i = 0; i < length; i++) {

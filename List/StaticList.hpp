@@ -6,14 +6,14 @@
 
 #include <iostream>
 #include "ListNode.hpp"
-#include "List.hpp"
+#include "Vector.hpp"
 
 namespace sl{
     const int MAX_SIZE = 10; // 静态链表的最大容量
 }
 
 template <typename T>
-class StaticList: public List<T> { // 静态链表模板类
+class StaticList: public Vector<T> { // 静态链表模板类
 protected:
     StaticNodePtr(T) head; // 头节点
 private:
@@ -27,7 +27,7 @@ private:
     }
 
 public:
-    explicit StaticList(int size = sl::MAX_SIZE): List<StaticNode<T>>(size) {
+    explicit StaticList(int size = sl::MAX_SIZE): Vector<StaticNode<T>>(size) {
         this->head = this->data;
     }; // 构造函数
 };
